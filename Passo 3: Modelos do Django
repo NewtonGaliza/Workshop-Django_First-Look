@@ -1,0 +1,107 @@
+Modelos do Django
+
+Antes, precisamos entender um conceito muito importante da programação,
+chamado de Programação Orientada a Objetos(POO).
+
+A intençao desse conceito é, em vez de escrevermos tudo numa sequência de instruções,
+podemos modelar a situação de forma que se assemelhe com o funcionamento no mundo real.
+
+Um objeto é uma instância de classe, por exemplo, um Gato, ele possui certas propriedades
+como cor e idade e também ações comer, arranhar, roronar.
+As propriedades, são chamadas de propriedades do objeto, e as açes chamadas de métodos.
+
+Gato
+----
+cor
+idade
+comer()
+arranhar()
+roronar()
+
+Um pequeno exercício, um Carro, quais seriam seus métodos e propriedades?
+
+No nosso projeto, teremos um objeto Post, o esquema do objeto Post, é o seguinte:
+Post
+----
+title
+text
+author
+created_date
+published_date
+publicar()
+Com tudo esquematizado, vamos começar a modelar tudo isso no Django.
+
+Modelo do Django
+
+No Django o modelo é um tipo especial de objeto, pois, ele fica salvo em um banco de dados,
+como foi falado nos passos anteriores, vamos utilizar o SQLite.
+
+Criando nosso Blog
+
+Vamos criar nosso blog, no Django os projetos são organizados em aplicações.
+Para criar o aplicativo do nosso blog vamos usar o comando:
+$python manage.py startapp blog
+Nossa pasta agora está organizada da seguinte maneira:
+blog
+  admin.py
+  apps.py
+  __init__.py
+  migrations
+    __init__.py
+  models.py
+  tests.py
+  views.py
+db.sqlite3
+firstlook
+manage.py
+
+Com a aplicação criada, precisamos dizer ao Django que vamos usá-la, fazemos isso no firstLook/settings.py
+adicionando a aplicação em INSTALLED_APPS, e adicionando o nome da aplicação, ficando assim:
+INSTALLED_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'blog',
+]
+
+Criando o modelo Post
+
+Todos os nossos Modelos, vão ficar no arquivo blog/models.py, aqui vamos definir nossa postagem.
+vamos olhar e analisar o código passo 3:blog_models.py
+
+Tudo o que começa com from ou import, são para adicionar trechos de código;
+class Post(models.Model), essa linha define nosso modelo(que é um objeto), onde
+class é uma palava reservada que indica que estamos definindo um objeto
+Post é o nome do nosso modelo, sempre comece o nome da classe com letra maiúscula;
+models.Models significa que o Post é um modelo do Django, portanto, precisa ser salvo no banco de dados;
+
+def publish(self) é o método publicar, que falamos antes, onde def significa que trata-se de um
+método/funçao e publish é o nome do método
+
+O método __str__ irá returnar para nós, o título do post.
+
+Criando as tabelas para nosso banco de dados
+
+A última etapa desse Passo, é adicinar o modelo no banco de dados.
+Primeiro, temos que avisar ao Django [, que nosso modelo possui mudanças, informamos essa mudança
+através do comando:
+$python manage.py makemigrations blog
+Teremos uma resposta similar a isto:
+djangoFirstLook$ python manage.py makemigrations blog
+Migrations for 'blog':
+  blog/migrations/0001_initial.py
+    - Create model Post
+    
+Com o arquivo de migraçao criado, vamos agora aplicar ao banco de dados, com o comando:
+$python manage.py migrate blog
+E devemos ter como resultado:
+djangoFirstLook$ python manage.py migrate blog
+Operations to perform:
+  Apply all migrations: blog
+Running migrations:
+  Applying blog.0001_initial... OK
+
+Com isto, o modelo de Post, agora está no banco de dados
