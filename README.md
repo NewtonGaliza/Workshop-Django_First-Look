@@ -1,1 +1,1 @@
-# Django_First-Look
+Workshop Django - First Look
