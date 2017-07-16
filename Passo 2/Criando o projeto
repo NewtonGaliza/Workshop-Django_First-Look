@@ -56,7 +56,3 @@ para iniciar o serividor, use o comando:
 $python manage.py runserver
 Com o servidor rodando, vamos abrir o navegador e acessar o endereço de teste do servidor:
 http:// 127.0.0:8000/
-
-
-
-
