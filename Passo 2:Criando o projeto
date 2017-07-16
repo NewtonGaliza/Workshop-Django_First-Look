@@ -1,0 +1,62 @@
+Criando o projeto
+
+Neste workshop, iremos criar um blog simples.
+
+O Django possui alguns arquivos e pastas que são importantes para seu funcionamento, sendo assim
+não renomeie ou mova estes arquivos, pois, o Django precisa manter uma estrutura para encontrar
+certos componentes.
+
+Com o myenv funcionando, vamos criar no nosso projeto
+$django-admin startproject  firstLook .
+O .(ponto) no final do comando, vai evitar que esja criada uma pasta com o mesmo nome do projeto.
+
+O django-admin é um script do Djang que irá criar as pastas e arquivos para você.
+A estrutura da pasta deve estar da seguinte forma:
+firstlook
+  __init__.py
+  settings.py
+  urls.py
+  wsgi.py
+manage.py
+
+O manage.py é o script de gestão do site, com ele podemos iniciar o servidor de teste, entre outras coisas.
+O settings.py é o script de configuração do site.
+O urls.py vai servir como um guia para as páginas do site.
+Os outros arquivos não são importantes no momento.
+
+Configurando
+
+Vamos abrir o arquivo settings.py, e vamos realizar algumas configurações
+Primeiro, vamos ajustar a hora, para isso procuramos pela opçao TIME_ZONE
+e vamos ajusta-la para:
+TIME_ZONE = 'America/Fortaleza'
+vamos finalizar, fazendo mais uma alteração, no final do arquivo, logo abaixo
+de STATIC_URL, adicione o comando:
+STATIC_ROOT = os.path.join(BASE_DIR, static')
+Este  o caminho para os arquivos estáticos e CSS, falaremos sobre eles mais adiante.
+
+Configurando o banco de dados
+
+Existem vários bancos de dados atualmente, mas aqui, iremos utilizar o que temos por padrão
+no Django, o sqlite3
+Que já se encontra confiurado no settings.py, na seçao DATABASES:
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
+}
+Vamos voltar para a pasta principal do nosso projeto(àquela onde se encontra o manage.py) para
+configurarmos o banco de dados, usando o seguinte comando:
+$python manage.py migrate
+Se recebermos o OK, significa que tudo ocorreu bem.
+
+AGora, vamos testar nosso projeto no servidor, o Django já possui um servidor de teste, 
+para iniciar o serividor, use o comando:
+$python manage.py runserver
+Com o servidor rodando, vamos abrir o navegador e acessar o endereço de teste do servidor:
+http:// 127.0.0:8000/
+
+
+
+
