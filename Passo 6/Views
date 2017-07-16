@@ -1,3 +1,22 @@
 Views
 
 Vamos tratar do erro do passo anterior.
+
+Uma view é onde iremos colocar a "lógica" da nossa aplicação. Ela solicita
+infirmaççoes a partir do model, que criamos antes, e passa para um template,
+que iremos criar no próximo passo. Nosas views serão adicionadas no arquivo blog/views.py
+
+blog/views.py
+
+Uma view é onde iremos colocar a "lógica" da nossa aplicação. Ela solicita
+informações a partir do model, que criamos antes, e passa para um template,
+que iremos criar no próximo passo. Nossas views serão adicionadas no arquivo blog/views.py
+
+Criamos um método(def) chamado post_list que aceita o request e retorna um método
+render que irá processar(montar) o modelo blog/post_list.html
+
+Salve o arquivo e vá para http://127.0.0.1:8000.
+
+Outro erro.
+
+TemplateDoesNotExist, em breve vamos resolver esse problema.
