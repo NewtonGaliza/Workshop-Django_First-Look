@@ -104,4 +104,4 @@ Operations to perform:
 Running migrations:
   Applying blog.0001_initial... OK
 
-Com isto, o modelo de Post, agora está no banco de dados
+Com isto, o modelo de Post, agora está no banco de dados.
