@@ -1,0 +1,22 @@
+Utilizaremos o Django Admin, para adicionar, editar e remover as postageens que criamos.
+
+Vamos abrir o arquivo blog/admin.py e susbstituir seu contedo por:
+from django.contrib import admin
+from .models import Post
+
+admin.site.register(Post)
+
+Como já explicamos antes, nós importamos(incluímos) o modelo Post e registramos para
+deixá-lo visível na págidna de administraçao.
+
+Vamos dar uma olhada no modelo de Post, iniciamos o servidor e acessamos:
+http://127.0.0.1/8000/admin
+
+Ainda não temos acesso, está faltando criarmos um usuário, mas no será um usuário comum,
+será um superusuário, que vai ter controle sobre tudo do site, volte para o terminal e 
+digite o comando:
+$python amange.py createsuperuser
+Crie algum superuser, a senha não irá aparecer enquanto você digita por questão de segurança.
+Volte para o navegador e faço o login, com o superuser.
+
+Adicione algumas postagens.
