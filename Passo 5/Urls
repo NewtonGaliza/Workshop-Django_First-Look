@@ -1,0 +1,49 @@
+Como funcionam as URLS no Django
+
+Vamos dar uma rpida no olhada no arquivo firstLook/urls.py.
+from django.conf.urls import url
+from django.contrib import admin
+
+urlpatterns = [
+    url(r'^admin/', admin.site.urls),
+]
+
+Regex
+
+Para identificar urls o Django usa regex, uma abreviaço para expressões regulares,
+que so usadas para formar um padrão de pesquisa. Regex  um tópico mais avançado, 
+recomendo que leiam um pouco sobre regex, mas aqui está um resumo rápido:
+
+^ para o início do texto
+$ para o final do texto 
+\d para um dígito 
++ para indicar que o item anterior deve ser repetido pelo menos uma vez 
+() para capturar parte do padrão
+
+Um exemplo de regex
+
+Para o endereço http://www.mysite.com/post/12345/, onde 12345, seria o id do seu post,
+a expressão regular seria a seguinte:
+^post/(\d+)/$
+Com ^post pegaramos tudo que tenha post/ no início da url;
+(\d+) indica que haverá um número, e que iremos capturar esse valor;
+/ diz que deve seguir outro /;
+$ indica o final da url.
+
+Criando nossa primeira url no Django
+
+Queremos que a url http://127.0.0.1:8000 seja a página inicial, para isso vamos editar 
+o arquivo firstLook/urls.py, deixando ele desta forma:
+from django.conf.urls import url
+from django.contrib import admin
+
+urlpatterns = [
+    url(r'^admin/', admin.site.urls),
+    url(r'', include('blog.urls')),
+]
+
+Assim semproe que acessarmos http://127.0.0.1:8000, seremos redirecionados para blog.urls onde teremos
+novas intruções.
+
+Só uma observação, sempre que trabalhamos com regex em Python, usamos u r na frente da sequência, com 
+isso podemos trabalhar com os caracteres brutos, mesmo que tenha algum caractere especial entre eles.
