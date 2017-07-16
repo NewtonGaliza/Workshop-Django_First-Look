@@ -47,3 +47,28 @@ novas intruções.
 
 Só uma observação, sempre que trabalhamos com regex em Python, usamos u r na frente da sequência, com 
 isso podemos trabalhar com os caracteres brutos, mesmo que tenha algum caractere especial entre eles.
+
+blog.urls
+
+Vamos criar um arquivo vazio em blog/urls.py, e adicionaremos estas linhas:
+from django.conf.urls import include, url
+from . import views
+
+urlpatterns = [
+    url(r'^$', views.post_list),
+]
+
+Com isso importamos métodos do Django e nossas views(faleramos sobre views no próximo passo),
+atribuindo uma view chamada post_list para ^$, que corresponde ao começo seguido por um fim,
+então somente uma sequência vazia vai corresponder. E isso é correto, porque os resolvedores
+de Django url, ' http://127.0.0.1:8000 /' não é uma parte da URL. Este padrão irá mostrar o Django
+que views.post_list é o lugar certo para ir, se alguém entra em seu site no endereço 'http://127.0.0.1:8000 /'.
+
+Vamos ver como nosso blog está.
+
+
+
+Temos um erro:
+AttributeError: 'module' object has no attribute 'post_list'
+Como não criamos a view, este erro apareu, em breve vamos resolver isso.
+
