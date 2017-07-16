@@ -1,0 +1,22 @@
+Instalando o Django
+
+-Ambiente Virtual e Instalação do Django
+
+Vamos preparar um ambiente virtual isolado, onde iremos instalar o Django. Um ambiente virtual permite que
+tenhamos várias instalações diferentes, sem que uma afete a outra.
+
+Vamos criar uma pasta para armazenar nosso estudo, utilizando o seguinte comando:
+$mkdir djangoFirstLook
+Em seguida, entraremos na pasta:
+$cd djangoFirstLook
+
+Agora iremos instalar o virutalenv, é ele que vai permitir criarmos o ambiente virtual:
+$[sudo] pip install virtualenv
+Criaremos um virtualenv chamado, myvenv, o comando de criação é o seguinte:
+$python3 -m venv myenv 
+Vamos ativar o myenv:
+$source myenv/bin/activate
+Para saber se o myenv está ativado, deve aparecer o prefixo (myenv)
+
+Finalmente, iremos instalar o Django, para o workshop, vamos usar a versão 1.11.3
+$pip install Django==1.11.3
