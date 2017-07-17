@@ -1,0 +1,18 @@
+Temos a nossa lógica modelada, precisamos agora apresentar essas informações no nosso blog,
+no Django as informações são apresentadas em templates, que são escritos em HTML.
+
+Vocês sabem o que é HTML?
+
+Criando nosso template
+
+Para termos o template, precisamos criar e organizar esses arquivos, vamos criar uma pasta,
+chamada templates, dentro da pasta blog, e para saber a que aplicação os templates pertencem,
+criamos uma pasta chamanda blog, dentro de templates, ficando assim;
+blog
+    templates
+	blog
+
+Na pasta blog, vamos criar o arquivo post_list.html, e vamos fazer alguns testes rápidos, com 
+alguns códigos html simples e testar no servidor.
+
+No próximo passo, vamos começar a trabalhar no nosso banco de dados.
