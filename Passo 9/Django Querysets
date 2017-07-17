@@ -1,0 +1,48 @@
+Django Querysets
+
+Nós temos, o model Post definido em models.py, a view post_list em view.py, e o template adicionado,
+para que nossas postagens apareçam no template, precisamos conectar as views aos models e templates.
+Na views post_list, vamos pegar os models que queremos exibir e passar para o template, editado o 
+arquivo blog/views.py, que antes estava assim:
+
+from django.shortcuts import render
+
+def post_list(request):
+    return render(request, 'blogpost_list.html', {})
+
+Primeiro, vamos importar o Post, contido em models.py, adicionando isto ao arquivo:
+
+from .models import Post
+
+O ponto depois de from significa o diretório atual ou o aplicativo atual. Como views.py e models.py
+ estão no mesmo diretório podemos simplesmente usar . e o nome do arquivo (sem .py). 
+Então nós importamos o nome do modelo (Post).
+
+Já vimos, queryset, no Passo anterior, agora vamos montar a view com a queryset, para ordenar os posts,
+pela published_date, vamos adicionar isso a nossa função, deixao ela assim:
+
+
+from django.shorcuts import render
+from django.utils import timezone
+from .models import Post
+
+def post_list(request):
+    posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
+    return render(request, 'blog/post_list.html', {})
+
+Nosso queryset, agora se chamaposts, só o que falta é passarmos o posts para o template, percebam
+que no final do return, temos um parâmetro {}, nele podemos acrescentar coisa s para que o template use,
+vamos colocar os post lá, da seguinte maneira:
+
+{'posts':posts}
+
+
+E no final, o arquivo blog/views.py, deve estar assim:
+
+from django.shortcuts import render
+from django.utils import timezone
+from .models import Post
+
+def post_list(request):
+    posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
+    return render(request, 'blog/post_list.html', {'posts': posts})
