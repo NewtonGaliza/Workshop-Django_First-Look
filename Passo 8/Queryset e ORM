@@ -1,0 +1,56 @@
+Vamos entender nesse Passo, como o Django se conecta ao banco de dadose como ele armazena os dados.
+
+Antes de tudo, ORM.
+
+O que é queryset
+
+É um conjunto de pesquisa, uma lista de objetos de um dado modelo. Com um queryset você pode ler,
+filtrar e ordenar dados.
+
+Quesyset no Django
+
+Vamos acessar o shell do Django, pelo comando
+$python manage.py shell
+Estamos agora, no shell do Django, uma versão do console normal do Python, só que este tem mais mágica.
+
+Vamos começar listando todas as nossas postagens, fazemos isso da seguinte forma:
+>>>from blog.models import Post
+>>>Post.objects.all()
+<QuerySet [<Post: Post object>, <Post: Post object>, <Post: Post object>]>
+O resultado que retorna para nós é uma lista dos post que criamos anteriormente, criados pela interface administrativa,
+no entanto, se quisermos criar mesnsagens utilizando o console, como fazemos isso?
+
+Criando um objeto
+
+Criamos uma postagem da seguinte forma:
+>>>Post.objects.create(author=me, title='teste3', text='teste3')
+COntudo, o me precisa ser o modelo User, entao vamos importar o modelo User:
+>>>from django.contrib.auth.models import User
+Agora, vemos quais usuários temos no banco:
+>>>User.objects.all()
+<QuerySet [<User: teste>]>
+Achamos nosso User, agora vamos setar nosso usuário:
+>>>me = User.objects.get(username='teste')
+Com tudo arranjado, podemos usar novamente o  comando original, dessa vez sem erros:
+>>>Post.objects.create(author=me, title='teste3', text='teste3')
+<Post: Post object>
+Como eu falei, este console tem mais mágica.
+Adicionem mais algumas postagens.
+
+Filtrar objetos
+
+Digamos, que você precisa entrar todas as postagens feitas, que possuam alguma palavra específica, 
+para isso precisamos usar o filter no lugar do all, e entre parênteses, indicamos qual condição será usada
+na filtragem, vamos por exemplo, filtrar as postagens por author:
+>>>Post.objects.filter(author=me)
+<QuerySet [<Post: Post object>, <Post: Post object>, <Post: Post object>, <Post: Post object>]>
+Outro exemplo, seria filtrar pelo title, buscando alguma palavra específica:
+>>>Post.objects.filter(title__contains='teste')
+<QuerySet [<Post: Post object>, <Post: Post object>, <Post: Post object>, <Post: Post object>]>
+Os dois sublinhados entre o title e contains, é uma sintaxe do ORM do Django, usada para separar
+nomes de campo('title') e operações de filtro('contains').
+
+Podemos também organizar por datas:
+>>>Post.objects.order_by('created_date')
+
+exit(), e vamos para o próximo passo.
