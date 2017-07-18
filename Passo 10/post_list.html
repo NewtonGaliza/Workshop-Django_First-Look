@@ -1,0 +1,29 @@
+<html>
+  <head>
+    <title>Teste</title>
+  </head>
+  <body>
+    <p>Hello</p>
+    <p>Everybody</p>
+    <div>
+	<p>lista de objetos</p>
+	{{ posts }}
+    </div>
+    <div>	
+	<p>posts individuais</p>
+	{% for post in posts %}
+	    {{ post }}
+	{% endfor %}
+    </div>
+    <div>
+    <h1>Workshop Django First Look</h1>
+    {% for post in posts %}
+        <div>
+	    <h2><a href="">{{ post.title }}</a></h2>
+	    <p>{{ post.text|linebreaksbr }}</p>
+	    <p>published:{{ post.published_date }}</p>
+	</div>
+    {% endfor %}
+   </div>
+  </body>
+</html>
