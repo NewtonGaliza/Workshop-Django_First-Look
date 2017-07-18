@@ -1,0 +1,21 @@
+Templates
+
+Hora de pensarmos na exibiçao, não podemos colocar código Python em uma página HTML, porque 
+so navegadores não vão interpretar as informações, para evitar esse problema, o Django fornece
+as tags de template, que nos permitem transformar objetos Python em código HTML.
+
+Para exibir uma variável no DJango template, usamo colchetes duplos {{}}, com o nome da variável dentro,
+como nossa variável se chama posts, o template ficará {{ posts }}
+
+Vamos editar o arquivo blog/templates/blog/post_list.html, adicionando {{ posts }} e verificando no servidor.
+
+Finalmente estamos vendo nossos posts, mas o que está sendo exibido é uma lista de objetos, precisamos percorrer
+essa lista para imprimir os posts individualmente, vamos fazer isso usando um for dentro da uma tag:
+
+{% for post in posts %}
+    {{ post }}
+{% endfor %}
+
+Vamos editar nosso HTML, para trabalhar em conjunto com o Python, organizando nossos posts.
+
+Uma observação, o linebreaksbr, passa o texto por um filtro, convertendo as quebras de linhas em parágrafos.
