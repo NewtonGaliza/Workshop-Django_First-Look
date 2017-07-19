@@ -1,0 +1,59 @@
+Incluindo funcionalidades
+
+Vamos adicionar uma nova funcionalidade, um link para uma página, com os detalhes do post, este link vai 
+ser o título da postagem.
+
+Vamos alterar o código em post_list.html, de:
+<h1><href="">{{ post.title }}</a></h1>
+para o seguinte:
+<h1><href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h1>
+
+E agora, as explicações. {% %} significa que estamos usando as tags de template, dó que desta vez estamos
+montando de forma que seja gerada uma url para nós. Se rodarmos o servidor, vamos ver o erro NoReverseMatch,
+pois não temos a view post_detail.
+
+Estamos querendo criar uma URL para guiar o Django, para a view chamada post_detail, que vai mostrar um post
+completo do blog, vamos adicionar a url, no caminho blog/urls.py:
+
+url(r'^post/(?P<pk>[0-9]+)/$', views.post_detail),
+
+
+Alguém consegue explicar essa url? Ninguém? Vamos lá?
+
+Começando com ^post / significa que após o começo, a URL deve ter a palavra post e /.
+(?P<pk>[0-9]+) significa que o Django vai levar tudo que você colocar aqui e transferir para uma view como uma variável chamada pk.
+[0-9] também nos diz que só pode ser um número, não uma letra (tudo entre 0 e 9).
++ significa que precisa existir um ou mais dígitos.
+Então algo como http://127.0.0.1:8000/post// não é válido, mas http://127.0.0.1:8000/post/1234567890/ é válido e o / marca o fim
+
+Mesmo depois de tudo isso, ainda temos um erro:
+
+AttributeError: 'module' object has no attribute 'post_detail'
+
+Vamos resolver o erro, adicionando a view post_detail.
+
+Desta vez, nossa view vai receber um parâmetro extra, pk. Então vamos definir nossa função da seguinte forma:
+
+def post_detail(request, pk)
+
+Mas aqui temos um erro, alguém sabe informar qual?
+
+Se não houver nenhum post, a chave primária pk, teremos o erro DoesNotExist.
+
+Para evitar isso, o Django lida com isso com o get_object_or_404. Caso não haja nenhum Post com o valor do pk,
+será exibida uma página de erro 404.
+
+Vamos voltar ao views.py e adicionar:
+
+from django.shortcuts import render, get_objects_or_404
+
+def post_detail(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+    return render(request, 'blog/post_detail.html', {'post':post})
+
+
+
+
+
+
+
